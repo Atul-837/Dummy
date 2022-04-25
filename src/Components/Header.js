@@ -22,12 +22,8 @@ class Header extends Component{
             <Navbar dark color="dark" expand="md">
               <div className="container">
                 <NavbarToggler onClick={this.toggleNav} />
-                <Collapse
-                  isOpen={this.state.isNavOpen}
-                  navbar
-                  className="justify-content-center"
-                >
-                  <Nav navbar>
+                <Collapse isOpen={this.state.isNavOpen} navbar className="justify-content-center">
+                  <Nav navbar >
                     <NavItem>
                       <NavLink className="nav-link" to="/home">
                         <span className="fa fa-home fa-lg"></span>HOME
@@ -53,17 +49,12 @@ class Header extends Component{
                 </Collapse>
               </div>
             </Navbar>
-            <div
-              class="jumbotron jumbotron-fluid"
-              style={{ backgroundColor: "black" }}
-            >
-              <div class="container d-flex align-items-center">
-                <h1 class="display-4">
+            <div className="jumbotron jumbotron-fluid" style={{backgroundColor: "black"}}>
+              <div className="container d-flex align-items-center">
+                <h1 className="display-4">
                   <img src="./images/HR.png" />
                 </h1>
-                <p class="lead" style={{ color: "aliceblue" }}>
-                  ROAD TO SPECIALITY FOOD MADE IN HIMALAYA'S SERVED IN PLAINS{" "}
-                </p>
+                <p className="lead" style={{color: "aliceblue"}}>ROAD TO SPECIALITY FOOD MADE IN HIMALAYA'S SERVED IN PLAINS </p>
               </div>
             </div>
           </>
