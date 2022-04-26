@@ -108,4 +108,3 @@ class CommentForm extends Component {
 }
 
 
-export default CommentForm
