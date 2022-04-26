@@ -9,16 +9,17 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import CommentForm from "./CommentForm";
 
-function RenderDish({ dish }) {
-  if (dish != null) {
+function RenderDish({ dish }){
+  if (dish) {
     return (
       <section className="row">
         <div className="col-12 col-md-5 mt-1">
           <Card>
             <CardImg
               width="100%"
-              src=  {dish.image}
+              src={dish.image}
               alt={dish.name}
             />
             <CardBody>
@@ -32,8 +33,9 @@ function RenderDish({ dish }) {
   } else {
     return <div></div>;
   }
-}
 
+}
+  
 function RenderComments({ comments }) {
   return (
     <div>
@@ -57,6 +59,9 @@ function RenderComments({ comments }) {
       ) : (
         <div></div>
       )}
+      <div className="container">
+        <CommentForm />
+      </div>
     </div>
   );
 }
@@ -83,6 +88,7 @@ const DishDetails = (props) => {
         <div className="col-12 col-md-5 m-1">
           <RenderComments comments={props.comments} />
         </div>
+       
       </div>
     </div>
   );
