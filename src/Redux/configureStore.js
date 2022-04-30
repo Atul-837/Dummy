@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { InitialFeedback } from "./form";
 
+
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
@@ -15,12 +16,14 @@ export const ConfigureStore = () => {
             comments: Comments,
             promotions: Promotions,
             leaders: Leaders,
+           
+
             ...createForms({
                 feedback: InitialFeedback
             })
         }),
         applyMiddleware(thunk, logger)
     )
-    
+   
         return store;
 }

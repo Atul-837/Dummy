@@ -1,4 +1,5 @@
-import * as ActionTypes from "./actionTypes";
+import * as ActionTypes  from './actionTypes'
+
 export const Promotions = (
   state = {
     isLoading: true,

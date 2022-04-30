@@ -8,7 +8,7 @@ import {
   Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors, actions } from "react-redux-form";
+import { Control, LocalForm, Errors, actions } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -25,8 +25,18 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Successfully submitted " + JSON.stringify(values));
-    alert("Form has been submitted");
+    this.props.postFeedback(
+      this.props.id,
+      values.firstname,
+      values.lastname,
+      values.telnum,
+      values.email,
+      values.contactType,
+      values.agree,
+      values.message
+    );
+
+    alert(JSON.stringify(values));
     this.props.resetFeedbackForm();
   }
 
@@ -96,16 +106,16 @@ class Contact extends Component {
             <h3>SEND US YOUR FEEDBACK</h3>
           </div>
           <div className="col-12 col-md-9">
-            <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
+            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
               <Row className="form-group">
-                <Label htmlFor="firstName" md={2}>
+                <Label htmlFor="firstname" md={2}>
                   First Name
                 </Label>
                 <Col md={10}>
                   <Control.text
-                    model=".firstName"
-                    id="firstName"
-                    name="firstName"
+                    model=".firstname"
+                    id="firstname"
+                    name="firstname"
                     className="form-control"
                     validators={{
                       required,
@@ -116,7 +126,7 @@ class Contact extends Component {
                   />
                   <Errors
                     className="text-danger"
-                    model=".firstName"
+                    model=".firstname"
                     show="touched"
                     messages={{
                       required: "Required",
@@ -127,14 +137,14 @@ class Contact extends Component {
                 </Col>
               </Row>
               <Row className="form-group">
-                <Label htmlFor="lastName" md={2}>
+                <Label htmlFor="lastname" md={2}>
                   Last Name
                 </Label>
                 <Col md={10}>
                   <Control.text
-                    model=".lastName"
-                    id="lastName"
-                    name="lastName"
+                    model=".lastname"
+                    id="lastname"
+                    name="lastname"
                     className="form-control"
                     validators={{
                       required,
@@ -145,7 +155,7 @@ class Contact extends Component {
                   />
                   <Errors
                     className="text-danger"
-                    model=".lastName"
+                    model=".lastname"
                     show="touched"
                     messages={{
                       required: "Required",
@@ -156,14 +166,14 @@ class Contact extends Component {
                 </Col>
               </Row>
               <Row className="form-group">
-                <Label htmlFor="phone" md={2}>
+                <Label htmlFor="telnum" md={2}>
                   Phone Number
                 </Label>
                 <Col md={10}>
                   <Control.text
-                    model=".phone"
-                    id="phone"
-                    name="phone"
+                    model=".telnum"
+                    id="telnum"
+                    name="telnum"
                     className="form-control"
                     validators={{
                       required,
@@ -175,7 +185,7 @@ class Contact extends Component {
                   />
                   <Errors
                     className="text-danger"
-                    model=".phone"
+                    model=".telnum"
                     show="touched"
                     messages={{
                       required: "Required",
@@ -261,7 +271,7 @@ class Contact extends Component {
                   </Button>
                 </Col>
               </Row>
-            </Form>
+            </LocalForm>
           </div>
         </div>
       </div>

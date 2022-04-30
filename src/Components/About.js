@@ -8,38 +8,60 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
+import {FadeTransform} from 'react-animation-components'
 
-function RenderLeader({ leader }) {
-  if (leader) {
-    return leader.map((leader) => {
-      return (
-        <div key={leader.id}>
-          <Media className="unstyled-list row">
-            <Media
-              left
-              middle
-              className="col-3 mt-5"
-              object
-              src={leader.image}
-              alt={leader.name}
-              style={{ height: "130px", width: "110px" }}
-            />
-
-            <Media body className="col-8 mt-5">
-              <Media heading>{leader.name}</Media>
-              <p>{leader.designation}</p>
-              <p>{leader.description}</p>
-            </Media>
-          </Media>
+function RenderLeader({ leader, id }) {
+  if (leader.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
         </div>
-      );
-    });
-  } else {
-    <div></div>;
-  }
-}
+      </div>
+    );
+  } else if (leader.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{leader.errMess}</h4>
+        </div>
+      </div>
+    );
+  } else
+    return (
+      <FadeTransform in
+      transformProps = {{
+        exitTransform: 'scale(0.5) translateY(-50%)' 
+      }}>
+      <div key={id}>
+        <Media className="unstyled-list row">
+          <Media
+            left
+            middle
+            className="col-3 mt-5"
+            object
+            src={baseUrl + leader.image}
+            alt={leader.name}
+            style={{ height: "130px", width: "110px" }}
+          />
 
+          <Media body className="col-8 mt-5">
+            <Media heading>{leader.name}</Media>
+            <p>{leader.designation}</p>
+            <p>{leader.description}</p>
+          </Media>
+        </Media>
+      </div>
+      </FadeTransform>
+    );
+}
 function About(props) {
+  const result = props.leaders.map((leader) => {
+    return <RenderLeader id = {leader.id} leader={leader} />;
+  });
+
   return (
     <div className="container">
       <div className="row">
@@ -115,9 +137,7 @@ function About(props) {
         <div className="col-12">
           <h2>Corporate Leadership</h2>
         </div>
-        <Media>
-          <RenderLeader leader={props.leaders} />
-        </Media>
+        <Media>{result}</Media>
       </div>
     </div>
   );

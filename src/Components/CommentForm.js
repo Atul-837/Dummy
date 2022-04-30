@@ -26,6 +26,7 @@ class CommentForm extends Component {
     this.toggleModal();
     alert(
       "Successfully submitted " + JSON.stringify(values)
+      
     );
   }
 
